@@ -35,4 +35,5 @@ Generate token:
 > In body {"username": "dev", "email": "dev@mail.com"}
 
 Request api:
-> [GET] 0.0.0.0:8001/api/rates
+> [GET] 0.0.0.0:8001/api/rates 
+> In request header: Authorization 'Token xxxxxxaaaaaaasssss"
