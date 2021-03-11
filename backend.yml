@@ -1,0 +1,25 @@
+version: '3.3'
+services:
+  api:
+    container_name: api
+    restart: always
+    build:
+      context: ./www/api/
+      dockerfile: ./Dockerfile
+    image: dploy-core/api:latest
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - './www/api:/app'
+    ports:
+      - "8001:8000"
+    expose:
+      - 8000
+    env_file:
+      - ./.envs/.local/.project
+    working_dir: /app/
+    networks:
+      - dploy
+
+networks:
+  dploy:
+
