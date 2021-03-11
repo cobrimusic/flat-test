@@ -36,4 +36,4 @@ Generate token:
 
 Request api:
 > [GET] 0.0.0.0:8001/api/rates 
-> In request header: Authorization 'Token xxxxxxaaaaaaasssss"
+> In request header: Authorization 'Token {your_token}"
