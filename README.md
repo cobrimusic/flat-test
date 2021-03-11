@@ -1,24 +1,15 @@
-# DPLOY DOCKER
+# D-PLOY DOCKER
 
-## Introduction
-
-> Development environment for BARRACUDA 
-
-## requerimientos
+## Requerimientos
 
 - Docker
 - Docker compose
 
 ## Installation
 
-Clone repository with all submodules:
+Clone repository:
 
-> git clone --recursive git@github.com:oxxo-labs/barracuda-core.git barracuda
-
-Then go to all submodules, located in folders like api, and change branch to master. For example:
-
-> cd pi && git checkout master
-
+> git clone git@github.com:cobrimusic/dploy-app-core.git
 
 ## Installation
 
@@ -26,6 +17,22 @@ Build project containers:
 
 > docker-compose -f backend.yml build
 
+Run migrations:
+
+> docker-compose -f backend.yml exec api python manage.py migrate 
+
+Run for create superuser:
+
+> docker-compose -f backend.yml exec api python manage.py createsuperuser --username dev --email dev@mail.com
+
 Run project:
 
 > docker-compose -f backend.yml up
+
+Generate token:
+
+> [POST] 0.0.0.0:8001/api/token/
+> In body {"username": "dev", "email": "dev@mail.com"}
+
+Request api:
+> [GET] 0.0.0.0:8001/api/rates
