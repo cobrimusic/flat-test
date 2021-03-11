@@ -15,24 +15,20 @@ Clone repository:
 
 Build project containers:
 
-> docker-compose -f backend.yml build
+> docker-compose -f backend.yml up --build
 
-Run migrations:
+Run migrations in other terminal tab:
 
 > docker-compose -f backend.yml exec api python manage.py migrate 
 
 Run for create superuser:
 
-> docker-compose -f backend.yml exec api python manage.py createsuperuser --username dev --email dev@mail.com
-
-Run project:
-
-> docker-compose -f backend.yml up
+> docker-compose -f backend.yml exec api python manage.py createsuperuser --username dev --email dev@mail.com and type a password
 
 Generate token:
 
 > [POST] 0.0.0.0:8001/api/token/
-> In body {"username": "dev", "email": "dev@mail.com"}
+> In body {"username": "dev", "password": "generated password"}
 
 Request api:
 > [GET] 0.0.0.0:8001/api/rates 
