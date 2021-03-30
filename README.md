@@ -9,7 +9,7 @@
 
 Clone repository:
 
-> git clone git@github.com:cobrimusic/dploy-app-core.git
+> git clone git@github.com:cobrimusic/flat-test.git
 
 ## Installation
 
