@@ -34,4 +34,4 @@ Token in react app:
 > www/app/
 > Touch a .env file and put the token generated
 > REACT_APP_TOKEN={your_token}
-> Maybe you need to dwown docker and up again
+> Maybe you need to down docker and up again
