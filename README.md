@@ -30,6 +30,7 @@ Generate token:
 > [POST] 0.0.0.0:8001/api/token/
 > In body {"username": "dev", "password": "generated password"}
 
-Request api:
-> [GET] 0.0.0.0:8001/api/rates 
-> In request header: Authorization 'Token {your_token}"
+Token in react app:
+> www/app/
+> Touch a .env file and put the token generated
+> REACT_APP_TOKEN={your_token}

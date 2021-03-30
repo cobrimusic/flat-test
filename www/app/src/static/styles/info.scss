@@ -1,0 +1,102 @@
+.media-content {
+    span.bar-container {
+        display: inline-block;
+        position: relative;
+        min-height: 1px;
+        height: 13.5px;
+        width: 225px;
+        margin: 0;
+        padding: 0;
+        box-shadow:none;
+        border:transparent;
+        border-radius:10px;
+        background-color: #f2f2f2;
+
+        span.bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            align-self: center;
+            width: 100%;
+            height: 100%;
+            background-color: #f2f2f2;
+            border-radius: 10px;
+        }
+    }
+}
+
+.tags {
+    .tag {
+        width: 100%;
+    }
+}
+
+a.back-link {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.bar-green {
+    background-color: #23d160!important;
+}
+
+.bar-blue {
+    background-color: #209cee!important;
+}
+
+@media(max-width:768px) and (orientation: landscape) {
+    .media-content {
+        span.bar-container {
+            width: calc((100% - 145px))!important;
+        }
+    }
+}
+@media(max-width:768px) {
+    .hero {
+        margin: 0!important;
+    }
+    .media{
+        display: block!important;
+
+        .media-left {
+            display: block;
+            margin: auto;
+            width: 195px;
+            height: 195px;
+        }
+
+        .media-content {
+            display: block;
+            position: relative;
+            overflow: hidden;
+            box-sizing: border-box;
+            min-height: 1px;
+            height: auto;
+            max-width: 100%;
+            margin: auto;
+            padding: 20px 0;
+
+            span.title-bar {
+                display: inline-block;
+                width: 100px;
+            }
+
+            span.bar-container {
+                width: calc((100% - 145px))!important;
+            }
+        }
+    }
+
+    .info-padding{
+        padding: 0.75rem!important;
+    }
+}
+
+.bar-aqua {
+    background-color: #00d1b2!important;   
+}
+
+.bar-yellow {
+    background-color: #ffdd57!important;
+}

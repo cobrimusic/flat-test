@@ -20,6 +20,22 @@ services:
     networks:
       - dploy
 
+  app:
+    container_name: app
+    build:
+      context: ./www/app/
+      dockerfile: ./Dockerfile
+    image: dploy-core/app:latest
+    volumes:
+      - './www/app:/app'
+      - '/app/node_modules'
+    ports:
+      - '3000:3000'
+    env_file:
+      - ./.envs/.local/.project
+    networks:
+      - dploy
+
 networks:
   dploy:
 
