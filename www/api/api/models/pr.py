@@ -9,7 +9,9 @@ class PullRequest(models.Model):
     title = models.CharField(max_length=250)
     description = models.CharField(max_length=250)
     user = models.CharField(max_length=250, blank=True, null=True)
-    status = models.CharField(max_length=128)
+    base_name = models.CharField(max_length=128, blank=True, null=True)
+    head_name = models.CharField(max_length=128, blank=True, null=True)
+    status = models.CharField(max_length=128, default='open')
     updated_on = models.DateTimeField(auto_now=True, blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 

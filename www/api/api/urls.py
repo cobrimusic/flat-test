@@ -13,5 +13,6 @@ urlpatterns = [
     path('api/v1/branches', git.get_branches, name='get_branches'),
     path('api/v1/branch/<branch>', git.get_branch, name='get_branch'),
     path('api/v1/commit/<commit>', git.get_commit, name='get_commit'),
+    path('api/v1/compare/<basehead>', git.get_compare, name='get_compare'),
     path('api/token/', obtain_auth_token, name='token_obtain_pair')
 ]

@@ -84,3 +84,10 @@ def get_commit(request, commit):
 
     return JsonResponse({"results": commit}, status = 200)
 
+
+@api_view(['GET'])
+def get_compare(request, basehead):
+    compare = git.compare_branches(basehead)
+
+    return JsonResponse({"results": compare}, status = 200)
+
