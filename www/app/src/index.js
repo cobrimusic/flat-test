@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 //Imports
 import './index.scss';
 import Lista from './views/Lista'
+import ListaPulls from './views/ListaPulls'
 import Detalles from './views/Detalles'
 import NotFound from './views/NotFound'
 
@@ -15,6 +16,7 @@ ReactDOM.render(<Router>
     <Switch>
         <Route exact path="/" component={Lista}/>
         <Route exact path="/lista" component={Lista}/>
+        <Route exact path="/pulls" component={ListaPulls}/>
         <Route exact path="/branch/:branch" component={Detalles}/>
         <Route component={ NotFound } />
     </Switch>

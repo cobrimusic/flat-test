@@ -9,7 +9,7 @@ const Hero = props => (
                     { props.title }
                 </h1>
                 <h2 className="subtitle">
-                    Consulta la información de tus branches github
+                    Consulta la información de tu github
                 </h2>
                 { props.redirect == 'true' && (
                     <Link to='/lista'><a className="back-link info-padding" href="javascript:void(0)">Ir a la lista...</a></Link>

@@ -41,7 +41,9 @@ def create_pr(request):
         title = body_data['title'],
         description = body_data['description'],
         user = body_data['user'],
-        status = body_data['status']
+        base_name = body_data['base'],
+        head_name = body_data['head'],
+        status = 'open'
     )
 
     return JsonResponse({"results": 'created'}, status = 200)

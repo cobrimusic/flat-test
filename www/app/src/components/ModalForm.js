@@ -1,18 +1,80 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 const ModalForm = props => {
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const [filesChanged, setFilesChanged] = useState()
+    const [formData, setFormData] = useState({})
+    const [canMake, setCanMake] = useState(false)
+    const [loader, setLoader] = useState(false)
 
     useEffect(() => {
-    },[props.data])
+        if(canMake) {
+            postData(formData)
+        }
+    }, [formData, canMake])
 
     const handleClose = () =>{
         props.closeModal(false)
     }
 
     const onSubmit = (form) => {
-        console.log('form', form)
+        setFormData(form)
+        if(form.base && form.head) {
+            makeRequest(`${form.base}...${form.head}`)
+        }
+    }
+
+    const makeRequest = (basehead) => {
+        setLoader(true)
+
+        fetch('http://0.0.0.0:8001/api/v1/compare/' + basehead, {
+            headers: new Headers({
+                "Authorization": "Token " + process.env.REACT_APP_TOKEN
+            })
+        })
+        .then(results => {
+            return results.json()
+        }).then(data => {
+            if(data.results.files.length > 0) {
+                let files = data.results.files.map((file) => {
+                    return(
+                        <li>
+                            { file.filename } | Additions: { file.additions } | Deletions: { file.deletions } | Changes: { file.changes } 
+                        </li>
+                    )
+                })
+
+                setFilesChanged(files)
+                setCanMake(true)
+            } else {
+                let files = (<li>No hay archivos para hacer merge</li>)
+                
+                setFilesChanged(files)
+                setCanMake(false)
+            }
+        })
+
+        setLoader(false)
+    }
+
+    const postData = data => {
+        fetch('http://0.0.0.0:8001/api/v1/pulls/create/', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: new Headers({
+                "Authorization": "Token " + process.env.REACT_APP_TOKEN
+            })
+        })
+        .then(results => {
+            return results.json()
+        }).then(result => {
+            setTimeout(() => {
+                handleClose()
+            }, 1000);
+
+            window.location.reload()
+        })
     }
 
     return (
@@ -47,7 +109,7 @@ const ModalForm = props => {
                                 <div className="control">
                                     <div className="select">
                                         <select {...register("base", { required: true })}>
-                                            <option value="" selected disabled>Seleccionar</option>
+                                            <option value="" disabled>Seleccionar</option>
                                             {
                                                 props.data ? (
                                                     props.data.map((d, i) => <option value={d.name} key={d.name}>{d.name}</option>)
@@ -64,7 +126,7 @@ const ModalForm = props => {
                                 <div className="control">
                                     <div className="select">
                                         <select {...register("head", { required: true })}>
-                                            <option value="" selected disabled>Seleccionar</option>
+                                            <option value="" disabled>Seleccionar</option>
                                             {
                                                 props.data ? (
                                                     props.data.map((d, i) => <option value={d.name} key={d.name}>{d.name}</option>)
@@ -76,13 +138,24 @@ const ModalForm = props => {
                                 </div>
                             </div>
                         </div>
-                       
+
+                        <input type="hidden" defaultValue="@cobrimusic" {...register("user")} />
 
                         <footer className="modal-card-foot">
                             <button type="submit" className="button is-success">Crear</button>
                             <button className="button" onClick={handleClose}>Cancelar</button>
                         </footer>
                     </form>
+
+                    <section className="changes-view">
+                        <ul style={{ listStyle: 'none', marginTop: '2px' }}>
+                            { filesChanged }
+                        </ul>
+                    </section>
+
+                    <section>
+                        { loader && 'Cargando...' }
+                    </section>
                 </section>
             </div>
         </div>
